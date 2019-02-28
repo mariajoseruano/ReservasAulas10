@@ -18,6 +18,7 @@ import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Pe
 
 
 
+
 /**
  *
  * @author usuario
@@ -83,6 +84,7 @@ public interface IModeloReservasAulas {
     void leerReservas();
 	
     void escribirReservas();
+    
     
 }
 
