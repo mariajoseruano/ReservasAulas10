@@ -3,28 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.iesalandalus.programacion.reservasaula.modelo;
+package org.iesalandalus.programacion.reservasaulas.controlador;
 
-/**
- *
- * @author usuario
- */
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
-import org.iesalandalus.programacion.reservaaulas.modelo.dominio.Aula;
-import org.iesalandalus.programacion.reservaaulas.modelo.dominio.Profesor;
-import org.iesalandalus.programacion.reservaaulas.modelo.dominio.Reserva;
+import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
+import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
+import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Permanencia;
 
 
-
-
 /**
  *
  * @author usuario
  */
-public interface IModeloReservasAulas {
+public interface IControladorReservasAulas {
 
+   void comenzar();
+    
+    void salir();
+    
     void anularReserva(Reserva reserva) throws OperationNotSupportedException;
 
     void borrarAula(Aula aula) throws OperationNotSupportedException, IllegalArgumentException;
@@ -37,23 +35,8 @@ public interface IModeloReservasAulas {
 
     Reserva buscarReserva(Reserva reserva);
 
+   
     boolean consultarDisponibilidad(Aula aula, Permanencia permanencia);
-
-    //Aulas
-    //Revisar gett
-    List<Aula> getAulas();
-
-    int getNumAulas();
-
-    int getNumProfesores();
-
-    int getNumReservas();
-
-    //Profesores
-    List<Profesor> getProfesores();
-
-    // Reservas
-    List<Reserva> getReservas();
 
     List<Reserva> getReservasAula(Aula aula);
 
@@ -61,10 +44,13 @@ public interface IModeloReservasAulas {
 
     List<Reserva> getReservasProfesores(Profesor profesor);
 
+    // Aulas:Ahora se llama al modelo no a aulas para insertar el aula.
     void insertarAula(Aula aula) throws OperationNotSupportedException, IllegalArgumentException;
 
+    //Profesores: lo mismo que aulas
     void insertarProfesor(Profesor profesor) throws OperationNotSupportedException;
 
+    // Reservas: los mismo cambios que aulas
     void realizarReserva(Reserva reserva) throws OperationNotSupportedException;
 
     List<String> representarAulas();
@@ -72,19 +58,6 @@ public interface IModeloReservasAulas {
     List<String> representarProfesores();
 
     List<String> representarReservas();
-    
-    void leerAulas();
-	
-    void escribirAulas();
-    
-    void leerProfesores();
-	
-    void escribirProfesores();
-    
-    void leerReservas();
-	
-    void escribirReservas();
-    
-    
-}
 
+       
+}

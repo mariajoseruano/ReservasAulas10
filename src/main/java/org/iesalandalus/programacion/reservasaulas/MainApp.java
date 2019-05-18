@@ -1,7 +1,7 @@
 package org.iesalandalus.programacion.reservasaulas;
 
-import org.iesalandalus.programacion.reservasaula.modelo.IModeloReservasAulas;
-import org.iesalandalus.programacion.reservasaula.modelo.ModeloReservasAulas;
+import org.iesalandalus.programacion.reservasaulas.modelo.IModeloReservasAulas;
+import org.iesalandalus.programacion.reservasaulas.modelo.ModeloReservasAulas;
 import org.iesalandalus.programacion.reservasaulas.controlador.ControladorReservasAulas;
 import org.iesalandalus.programacion.reservasaulas.controlador.IControladorReservasAulas;
 

@@ -1,5 +1,5 @@
 
-package org.iesalandalus.programacion.reservaaulas.modelo.dao;
+package org.iesalandalus.programacion.reservasaulas.modelo.dao;
 
 /**
  *
@@ -17,8 +17,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
-import org.iesalandalus.programacion.reservaaulas.modelo.dominio.Aula;
-import org.iesalandalus.programacion.reservaaulas.modelo.dominio.Profesor;
+import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
+import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
 
 /**
  *
@@ -26,17 +26,18 @@ import org.iesalandalus.programacion.reservaaulas.modelo.dominio.Profesor;
  */
 public class Profesores {
     
-    //Declaración de varibales.
+     //Declaración de varibales.
     
          // 1.Se crea la variable Fichero 
     
-        private static final String NOMBRE_FICHERO_PROFESORES="ficheros/profesores.dat";
-    
+        private static final String NOMBRE_FICHERO_PROFESORES="ficheros\\profesores.txt";
+                
+                // "ficheros/profesores.dat";
+                //C:\\Prog\\ficherosprofesores.dat"
     
          private List<Profesor> coleccionProfesores;
 	
-        
-       
+               
         // Se crea Constructor.
         
         public Profesores (){
@@ -134,36 +135,21 @@ public class Profesores {
         
         // 2.Se crean los métodos leer y escribir en el fichero
     
-    public void leer() throws FileNotFoundException, IOException {
+    public void leer()  {
         
-            // Creamos el objeto Fichero
-        
-		File ficheroProfesores = new File(NOMBRE_FICHERO_PROFESORES);
-            
-            //Creamos un flujo que será de entrada
-            
-            FileInputStream filein= new FileInputStream(ficheroProfesores);
-
-            // Conecta el flujo de bytes al flujo de datos;
-            
-            ObjectInputStream entrada= new ObjectInputStream(filein);
-            
+      File ficheroProfesores = new File(NOMBRE_FICHERO_PROFESORES);
+      
+		try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(ficheroProfesores))) {
                     
-            try {
-                
-            	Profesor profesor = null;
-			
-                do {
-			
-                    profesor = (Profesor) entrada.readObject();
-                    insertar(profesor);
-		
-                } while (profesor!= null);
-                
+			Profesor profesor = null;
+			do {
+				profesor = (Profesor) entrada.readObject();
+				insertar(profesor);
+			} while (profesor != null);
 		} catch (ClassNotFoundException e) {
 			System.out.println("No puedo encontrar la clase que tengo que leer.");
 		} catch (FileNotFoundException e) {
-			System.out.println("No puedo abrir el fihero de profesores.");
+			System.out.println("No puedo abrir el fichero de profesores.");
 		} catch (EOFException e) {
 			System.out.println("Fichero profesores leído satisfactoriamente.");
 		} catch (IOException e) {
@@ -171,42 +157,30 @@ public class Profesores {
 		} catch (OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 		}
-            
-            // Se cierra el flujo
-            
-            entrada.close();
 	}
 	
-	public void escribir() throws FileNotFoundException, IOException {
-		
-            File ficheroProfesores = new File(NOMBRE_FICHERO_PROFESORES);
+	public void escribir() {
+            
+		File ficheroProfesores = new File(NOMBRE_FICHERO_PROFESORES);
                 
-            //Creamos un flujo que será de salida
-            
-            FileOutputStream fileout= new FileOutputStream(ficheroProfesores);
-
-            // Conecta el flujo de bytes al flujo de datos;
-            
-            ObjectOutputStream salida= new ObjectOutputStream(fileout);
-            
-            try{        
-                        
-		for (Profesor profesor  : coleccionProfesores)
-		
-                    salida.writeObject(profesor);
-                
-		System.out.println("Fichero profesores escrito satisfactoriamente.");
+		try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficheroProfesores))){
+			for (Profesor profesor : coleccionProfesores)
+				salida.writeObject(profesor);
+			System.out.println("Fichero profesores escrito satisfactoriamente.");
 		} catch (FileNotFoundException e) {
-		
-                System.out.println("No puedo crear el fichero de profesor");
+			System.out.println("No puedo crear el fichero de profesores");
 		} catch (IOException e) {
-		System.out.println("Error inesperado de Entrada/Salida");
+			System.out.println("Error inesperado de Entrada/Salida");
 		}
-            
-            salida.close();
 	}
-        
 }
+  
+        
+        
+        
+              
+        
+
 
        
 
